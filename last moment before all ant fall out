@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    int getLastMoment(int n, vector<int>& left, vector<int>& right) {
+        int maxLeft = 0;
+        for (int pos : left) {
+            maxLeft = max(maxLeft, pos); // Time = position (left-moving ants)
+        }
+
+        int maxRight = 0;
+        for (int pos : right) {
+            maxRight = max(maxRight, n - pos); // Time = n - position (right-moving ants)
+        }
+
+        return max(maxLeft, maxRight); // Return the maximum of both
+        
+    }
+};
