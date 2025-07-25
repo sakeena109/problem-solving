@@ -1,0 +1,8 @@
+class Solution {
+  public:
+    vector<int> getMoreAndLess(vector<int> &arr, int target) {
+        int less_equal = upper_bound(arr.begin(), arr.end(), target) - arr.begin();
+        int greater_equal = arr.end() - lower_bound(arr.begin(), arr.end(), target);
+        return {less_equal, greater_equal};
+    }
+};
