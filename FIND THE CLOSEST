@@ -1,0 +1,30 @@
+class Solution {
+  public:
+    int findClosest(vector<int>& arr, int k) {
+        int low = 0, high = arr.size() - 1;
+        int closest = arr[0];
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            // If exact match found
+            if (arr[mid] == k) return arr[mid];
+
+            // Update closest based on absolute difference
+            int currentDiff = abs(arr[mid] - k);
+            int closestDiff = abs(closest - k);
+
+            if (currentDiff < closestDiff || (currentDiff == closestDiff && arr[mid] > closest)) {
+                closest = arr[mid];
+            }
+
+            // Adjust binary search range
+            if (arr[mid] < k)
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+
+        return closest;
+    }
+};
