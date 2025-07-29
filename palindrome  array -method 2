@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool isPalinArray(vector<int>& arr) {
+        for (int num : arr) {
+            string s = to_string(num);
+            string rev = s;
+            reverse(rev.begin(), rev.end());
+            if (s != rev)
+                return false;
+        }
+        return true;
+    }
+};
