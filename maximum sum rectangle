@@ -1,0 +1,35 @@
+class Solution {
+  public:
+    // Helper function to apply Kadane's algorithm on a 1D array
+    int kadane(vector<int>& arr) {
+        int maxSum = arr[0], currentSum = arr[0];
+        for (int i = 1; i < arr.size(); i++) {
+            currentSum = max(arr[i], currentSum + arr[i]);
+            maxSum = max(maxSum, currentSum);
+        }
+        return maxSum;
+    }
+
+    // Main function to compute maximum sum rectangle in 2D matrix
+    int maxRectSum(vector<vector<int>> &mat) {
+        int n = mat.size();
+        if (n == 0) return 0;
+        int m = mat[0].size();
+        int maxSum = INT_MIN;
+
+        // Fix left and right column boundaries
+        for (int left = 0; left < m; left++) {
+            vector<int> temp(n, 0);
+            for (int right = left; right < m; right++) {
+                // Update temp row sums
+                for (int row = 0; row < n; row++) {
+                    temp[row] += mat[row][right];
+                }
+                // Apply Kadane’s on temp[]
+                int sum = kadane(temp);
+                maxSum = max(maxSum, sum);
+            }
+        }
+        return maxSum;
+    }
+};
